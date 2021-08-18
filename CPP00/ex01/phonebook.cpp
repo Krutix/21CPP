@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define PHONEBOOK_CAPACITY 8
+#define PHONEBOOK_CAPACITY 3
 
 class Contact
 {
@@ -49,7 +49,8 @@ class PhoneBook
 public:
     PhoneBook()
     {
-        _shift = _size = 0;
+        _size = 0;
+        _shift = -1;
     }
 
     void add(std::istream& is)
