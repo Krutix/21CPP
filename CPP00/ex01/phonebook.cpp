@@ -37,6 +37,13 @@ private:
     std::string darkest_secret;
 };
 
+std::string cut_with_dot(std::string const& str, size_t size)
+{
+    if (str.size() > size)
+        return str.substr(0, size - 1).append(".");
+    return str;
+}
+
 class PhoneBook
 {
 public:
