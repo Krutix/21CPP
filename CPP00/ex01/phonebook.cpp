@@ -74,22 +74,48 @@ public:
         ::new (&_phonebook[insert_person()])Contact(first_name, last_name, nickname, phone_number, darkest_secret);
     }
 
-    std::string search(std::istream& is)
+    void search(std::istream& is)
     {
-
+        this->show_as_table();
+        size_t idx;
+        std::cout << "Contact index: ";
+        is >> idx;
+        if (idx >= _size)
+            std::cout << "Index out of bounds";
+        else
+            this->show_contact(idx);
     }
 
 private:
     size_t insert_person();
-    void   show_as_table() const
-    {
 
-    }
+    void show_as_table() const;
+    void show_contact(size_t idx) const;
 
     Contact _phonebook[PHONEBOOK_CAPACITY];
     size_t _size;
     size_t _shift;
 };
+
+void   PhoneBook::show_contact(size_t idx) const
+{
+    std::cout << "First name: " << _phonebook[idx].get_first_name() << '\n';
+    std::cout << "Last name: " << _phonebook[idx].get_last_name() << '\n';
+    std::cout << "Nickname: " << _phonebook[idx].get_nickname() << '\n';
+    std::cout << "Phone number: " << _phonebook[idx].get_phone_number() << '\n';
+    std::cout << "Darkest secret: " << _phonebook[idx].get_dargest_secret() << '\n';
+}
+
+void   PhoneBook::show_as_table() const
+{
+    for (size_t idx = 0; idx < _size; idx++)
+    {
+        std::cout << '[' << idx << ']' << "|"
+            << std::setw(10) << cut_with_dot(_phonebook[idx].get_first_name(), 10) << "|"
+            << std::setw(10) << cut_with_dot(_phonebook[idx].get_last_name(), 10) << "|"
+            << std::setw(10) << cut_with_dot(_phonebook[idx].get_nickname(), 10) << "|\n";
+    }
+}
 
 size_t PhoneBook::insert_person()
 {
