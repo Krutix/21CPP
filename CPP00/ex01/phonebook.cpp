@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define PHONEBOOK_CAPACITY 3
+#define PHONEBOOK_CAPACITY 8
 
 class Contact
 {
@@ -37,55 +37,15 @@ private:
     std::string darkest_secret;
 };
 
-std::string cut_with_dot(std::string const& str, size_t size)
-{
-    if (str.size() > size)
-        return str.substr(0, size - 1).append(".");
-    return str;
-}
+std::string cut_with_dot(std::string const& str, size_t size);
 
 class PhoneBook
 {
 public:
-    PhoneBook()
-    {
-        _size = 0;
-        _shift = -1;
-    }
+    PhoneBook();
 
-    void add(std::istream& is)
-    {
-        std::string first_name;
-        std::string last_name;
-        std::string nickname;
-        std::string phone_number;
-        std::string darkest_secret;
-
-        std::cout << "Enter first name: ";
-        is >> first_name;
-        std::cout << "Enter last name: ";
-        is >> last_name;
-        std::cout << "Enter nickname: ";
-        is >> nickname;
-        std::cout << "Enter phone number: ";
-        is >> phone_number;
-        std::cout << "Enter darkest secret: ";
-        is >> darkest_secret;
-
-        ::new (&_phonebook[insert_person()])Contact(first_name, last_name, nickname, phone_number, darkest_secret);
-    }
-
-    void search(std::istream& is)
-    {
-        this->show_as_table();
-        size_t idx;
-        std::cout << "Contact index: ";
-        is >> idx;
-        if (idx >= _size)
-            std::cout << "Index out of bounds";
-        else
-            this->show_contact(idx);
-    }
+    void add(std::istream& is);
+    void search(std::istream& is);
 
 private:
     size_t insert_person();
@@ -97,6 +57,73 @@ private:
     size_t _size;
     size_t _shift;
 };
+
+
+int main()
+{
+    PhoneBook phonebook;
+
+    while (true)
+    {
+        std::string input;
+        std::cin >> input;
+
+        if      (input == "ADD")
+            phonebook.add(std::cin);
+        else if (input == "SEARCH")
+            phonebook.search(std::cin);
+        else if (input == "EXIT")
+            return (0);
+    }
+}
+
+
+std::string cut_with_dot(std::string const& str, size_t size)
+{
+    if (str.size() > size)
+        return str.substr(0, size - 1).append(".");
+    return str;
+}
+
+PhoneBook::PhoneBook()
+{
+    _size = 0;
+    _shift = -1;
+}
+
+void   PhoneBook::add(std::istream& is)
+{
+    std::string first_name;
+    std::string last_name;
+    std::string nickname;
+    std::string phone_number;
+    std::string darkest_secret;
+
+    std::cout << "Enter first name: ";
+    is >> first_name;
+    std::cout << "Enter last name: ";
+    is >> last_name;
+    std::cout << "Enter nickname: ";
+    is >> nickname;
+    std::cout << "Enter phone number: ";
+    is >> phone_number;
+    std::cout << "Enter darkest secret: ";
+    is >> darkest_secret;
+
+    ::new (&_phonebook[insert_person()])Contact(first_name, last_name, nickname, phone_number, darkest_secret);
+}
+
+void   PhoneBook::search(std::istream& is)
+{
+    this->show_as_table();
+    size_t idx;
+    std::cout << "Contact index: ";
+    is >> idx;
+    if (idx >= _size)
+        std::cout << "Index out of bounds";
+    else
+        this->show_contact(idx);
+}
 
 void   PhoneBook::show_contact(size_t idx) const
 {
@@ -129,21 +156,3 @@ size_t PhoneBook::insert_person()
         return _size++;
 }
 
-
-int main()
-{
-    PhoneBook phonebook;
-
-    while (true)
-    {
-        std::string input;
-        std::cin >> input;
-
-        if      (input == "ADD")
-            phonebook.add(std::cin);
-        else if (input == "SEARCH")
-            phonebook.search(std::cin);
-        else if (input == "EXIT")
-            return (0);
-    }
-}
