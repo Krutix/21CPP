@@ -123,11 +123,11 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex00
+NAME = ex02
 
-SET_NAME_EXE	= zombie
+SET_NAME_EXE	= account
 SET_INC_DIR		=
-SET_SRCS		= ./main.cpp ./newZombie.cpp ./randomChump.cpp ./Zombie.cpp
+SET_SRCS		= ./tests.cpp ./Account.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2
 SET_LIBS		=
