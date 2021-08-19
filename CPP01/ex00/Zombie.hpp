@@ -6,7 +6,8 @@ class Zombie
 {
 public:
     Zombie(std::string const& name = "") : name(name) {}
-    void announce() const { std::cout << name << " BraiiiiiiinnnzzzZ"; }
+    ~Zombie() { std::cout << name << "destructed\n"; }
+    void announce() const { std::cout << name << " BraiiiiiiinnnzzzZ\n"; }
 private:
     std::string name;
 };
