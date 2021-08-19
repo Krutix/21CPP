@@ -88,7 +88,7 @@ std::string cut_with_dot(std::string const& str, size_t size)
 PhoneBook::PhoneBook()
 {
     _size = 0;
-    _shift = -1;
+    _shift = 0;
 }
 
 void   PhoneBook::add(std::istream& is)
@@ -149,8 +149,9 @@ size_t PhoneBook::insert_person()
 {
     if (_size == PHONEBOOK_CAPACITY)
     {
+        size_t pos = _shift;
         _shift = (_shift + 1) % PHONEBOOK_CAPACITY;
-        return _shift;
+        return pos;
     }
     else
         return _size++;
