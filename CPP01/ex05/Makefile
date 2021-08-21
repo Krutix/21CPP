@@ -123,9 +123,9 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex03
+NAME = ex05
 
-SET_NAME_EXE	= string_fun
+SET_NAME_EXE	= karen
 SET_INC_DIR		=
 SET_SRCS		= ./main.cpp
 SET_FTST_SRCS	=

@@ -123,7 +123,7 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex03
+NAME = ex04
 
 SET_NAME_EXE	= string_fun
 SET_INC_DIR		=
