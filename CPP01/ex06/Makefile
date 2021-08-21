@@ -123,9 +123,9 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex05
+NAME = ex06
 
-SET_NAME_EXE	= karen
+SET_NAME_EXE	= karenFilter
 SET_INC_DIR		=
 SET_SRCS		= ./main.cpp ./Karen.cpp
 SET_FTST_SRCS	=
