@@ -20,7 +20,7 @@ void Karen::complain(std::string level)
 		&Karen::error
 	};
 
-	Level lvl = convert2lvl(level);
+	Level lvl = Karen::convert2lvl(level);
 
 	if (lvl == Level::NONE)
 		return ;

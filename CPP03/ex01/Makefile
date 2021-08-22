@@ -26,7 +26,7 @@ NAME			?= -
 
 # Compiler setup
 CXX			= g++
-CXXFLAGS	=  --std=c++98 -Wall -Wextra -Werror
+CXXFLAGS	= --std=c++98 -Wall -Wextra -Werror
 
 #######################################################
 #
@@ -123,11 +123,11 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex02
+NAME = ex01
 
-SET_NAME_EXE	= account
+SET_NAME_EXE	= clapTrap
 SET_INC_DIR		=
-SET_SRCS		= ./tests.cpp ./Account.cpp
+SET_SRCS		= ./main.cpp ./ClapTrap.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2
 SET_LIBS		=

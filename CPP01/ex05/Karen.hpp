@@ -14,7 +14,7 @@ public:
 	};
 
 	void complain(std::string level);
-	Level convert2lvl(std::string level);
+	static Level convert2lvl(std::string level);
 
 private:
 	using msg_func = void(Karen::*)();

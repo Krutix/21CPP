@@ -26,7 +26,7 @@ NAME			?= -
 
 # Compiler setup
 CXX			= g++
-CXXFLAGS	= -Wall -Wextra -Werror
+CXXFLAGS	=  --std=c++98 -Wall -Wextra -Werror
 
 #######################################################
 #
