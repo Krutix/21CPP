@@ -7,9 +7,9 @@ class DiamondTrap : public FragTrap, public ScavTrap
 protected:
 	enum DefaultValues
 	{
-		HIT_POINTS =    FragTrap::HIT_POINTS,
+		HIT_POINTS    = FragTrap::HIT_POINTS,
 		ENERGY_POINTS = ScavTrap::ENERGY_POINTS,
-		DAMAGE =        FragTrap::DAMAGE
+		DAMAGE        = FragTrap::DAMAGE
 	};
 
 public:

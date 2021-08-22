@@ -8,7 +8,10 @@ ClapTrap::ClapTrap(
 	: _name(name),
 	  _hitpoints(hitpoints),
 	  _energypoints(energypoints),
-	  _damage(damage) {}
+	  _damage(damage)
+{
+	std::cout << "ClapTrap " << _name << " constructor called\n";
+}
 
 ClapTrap::ClapTrap(ClapTrap const& other)
 	: _name(other._name),

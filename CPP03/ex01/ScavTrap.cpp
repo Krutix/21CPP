@@ -22,7 +22,7 @@ ScavTrap& ScavTrap::operator=(ScavTrap const& other)
 
 void ScavTrap::attack(std::string const& target) const
 {
-	std::cout << "ScavTrap " << _name << " attack "
+	std::cout << "ScavTrap " << _name << " hug "
 		<< target << " causing "
 		<< _damage  << " points of damage!\n";
 }

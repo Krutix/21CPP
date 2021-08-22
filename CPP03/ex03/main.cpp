@@ -1,8 +1,33 @@
-#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-	ScavTrap st("Serena");
-	st.attack("Dillyuk");
-	st.guardGate();
+	{
+		ClapTrap cl("Billi Milligan");
+		ClapTrap cl2("Miya Atsumu");
+		cl.attack("cl2");
+		cl2.takeDamage(0);
+		cl.beRepaired(10);
+	}
+	{
+		ScavTrap st("Serena");
+		st.beRepaired(10);
+		st.attack("Dillyuk");
+		st.guardGate();
+	}
+	{
+		FragTrap st("Mio Akiyama");
+		st.beRepaired(10);
+		st.attack("Ritsu Tainaka");
+		st.highFivesGuys();
+	}
+	{
+		DiamondTrap dt("Yui Hirasawa");
+		dt.attack("Azu-nyan");
+		dt.attack("Azu-nyan");
+		dt.attack("Azu-nyan");
+		dt.attack("Azu-nyan");
+		dt.attack("Azu-nyan");
+		dt.whoAmI();
+	}
 }

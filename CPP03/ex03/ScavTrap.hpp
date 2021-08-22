@@ -6,9 +6,9 @@ class ScavTrap : virtual public ClapTrap
 protected:
 	enum DefaultValues
 	{
-		HIT_POINTS = 100,
+		HIT_POINTS    = 100,
 		ENERGY_POINTS = 50,
-		DAMAGE = 20
+		DAMAGE        = 20
 	};
 
 public:

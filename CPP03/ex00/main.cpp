@@ -2,9 +2,11 @@
 
 int main()
 {
-	ClapTrap cl("Billi Milligan");
-	ClapTrap cl2(cl);
-	cl.attack("cl2");
-	cl2.takeDamage(0);
-	cl.beRepaired(10);
+	{
+		ClapTrap cl("Billi Milligan");
+		ClapTrap cl2("Miya Atsumu");
+		cl.attack("cl2");
+		cl2.takeDamage(0);
+		cl.beRepaired(10);
+	}
 }

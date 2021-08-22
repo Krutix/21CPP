@@ -6,9 +6,9 @@ class FragTrap : virtual public ClapTrap
 protected:
 	enum DefaultValues
 	{
-		HIT_POINTS = 100,
+		HIT_POINTS    = 100,
 		ENERGY_POINTS = 100,
-		DAMAGE = 30
+		DAMAGE        = 30
 	};
 
 public:
