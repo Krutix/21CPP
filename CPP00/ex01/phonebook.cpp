@@ -37,8 +37,6 @@ private:
     std::string darkest_secret;
 };
 
-std::string cut_with_dot(std::string const& str, size_t size);
-
 class PhoneBook
 {
 public:
@@ -57,26 +55,6 @@ private:
     size_t _size;
     size_t _shift;
 };
-
-
-int main()
-{
-    PhoneBook phonebook;
-
-    while (true)
-    {
-        std::string input;
-        std::cin >> input;
-
-        if      (input == "ADD")
-            phonebook.add(std::cin);
-        else if (input == "SEARCH")
-            phonebook.search(std::cin);
-        else if (input == "EXIT")
-            return (0);
-    }
-}
-
 
 std::string cut_with_dot(std::string const& str, size_t size)
 {
@@ -157,3 +135,21 @@ size_t PhoneBook::insert_person()
         return _size++;
 }
 
+
+int main()
+{
+    PhoneBook phonebook;
+
+    while (true)
+    {
+        std::string input;
+        std::cin >> input;
+
+        if      (input == "ADD")
+            phonebook.add(std::cin);
+        else if (input == "SEARCH")
+            phonebook.search(std::cin);
+        else if (input == "EXIT")
+            return (0);
+    }
+}

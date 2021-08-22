@@ -30,7 +30,7 @@ private:
 class HumanB
 {
 public:
-    HumanB(std::string const& name) : name(name), weapon(nullptr) {}
+    HumanB(std::string const& name) : name(name), weapon(NULL) {}
 
     void attack() const
     {

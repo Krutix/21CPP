@@ -125,7 +125,7 @@ b_norml:
 #
 NAME = ex03
 
-SET_NAME_EXE	= string_fun
+SET_NAME_EXE	= human
 SET_INC_DIR		=
 SET_SRCS		= ./main.cpp
 SET_FTST_SRCS	=

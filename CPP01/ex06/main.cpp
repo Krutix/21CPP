@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 	switch (Karen::convert2lvl(argv[1]))
 	{
 		case Karen::NONE:
+			std::cout << "[Probably complaining about insignificant problems]\n";
 			break;
 		case Karen::DEBUG:
 			k.debug();

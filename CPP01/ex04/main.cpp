@@ -2,9 +2,6 @@
 #include <fstream>
 #include <string>
 
-int main()
+int main(int argc, char *argv[])
 {
-	std::string filename;
-	std::cin >> filename;
-	std::ifstream fis;
 }

@@ -129,7 +129,7 @@ SET_NAME_EXE	= karenFilter
 SET_INC_DIR		=
 SET_SRCS		= ./main.cpp ./Karen.cpp
 SET_FTST_SRCS	=
-SET_FLAGS		= -O2
+SET_FLAGS		= -O2 -Werror=implicit-fallthrough=0
 SET_LIBS		=
 SET_LIBS_DIRS	=
 
