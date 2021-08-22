@@ -123,11 +123,11 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex00
+NAME = ex02
 
 SET_NAME_EXE	= clapTrap
 SET_INC_DIR		=
-SET_SRCS		= ./main.cpp ./ClapTrap.cpp
+SET_SRCS		= ./main.cpp ./ClapTrap.cpp ./ScavTrap.cpp ./FragTrap.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2 -Wshadow -Wno-shadow
 SET_LIBS		=

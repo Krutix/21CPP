@@ -13,11 +13,11 @@ public:
 
 	virtual ~ClapTrap();
 
-	virtual void attack(std::string const & target) const;
+	void attack(std::string const & target) const;
 
-	virtual void takeDamage(unsigned int amount);
+	void takeDamage(unsigned int amount);
 
-	virtual void beRepaired(unsigned int amount);
+	void beRepaired(unsigned int amount);
 
 protected:
 	enum DefaultValues
