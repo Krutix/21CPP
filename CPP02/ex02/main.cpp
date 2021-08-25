@@ -24,4 +24,17 @@ int main()
 
 	std::cout << c - c - c << std::endl;
 	std::cout << c - c - a << std::endl;
+
+	a = Fixed(0.5f);
+	c = Fixed(-10);
+	std::cout << c / a << std::endl;
+	a = Fixed(-0.5f);
+	c = Fixed(-10);
+	std::cout << c / a << std::endl;
+	a = Fixed(-0.5f);
+	c = Fixed(-10);
+	std::cout << c * a << std::endl;
+	a = Fixed(-0.5f);
+	c = Fixed(10);
+	std::cout << c * a << std::endl;
 }
