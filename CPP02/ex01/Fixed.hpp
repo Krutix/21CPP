@@ -6,7 +6,7 @@
 class Fixed
 {
 private:
-    using raw_bits_t = u_int32_t;
+    typedef int raw_bits_t;
 public:
     Fixed();
 

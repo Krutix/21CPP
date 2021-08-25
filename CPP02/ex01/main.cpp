@@ -3,9 +3,9 @@
 
 int main()
 {
-    Fixed a(3.5f);
-    Fixed const b( 10 );
-    Fixed const c( 42.42f );
+    Fixed a(-3.5f);
+    Fixed const b( -10 );
+    Fixed const c( -42.42f );
     Fixed const d( b );
     Fixed const g( 0.42f );
     Fixed const z( 0.f );

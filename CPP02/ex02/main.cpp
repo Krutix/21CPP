@@ -21,4 +21,7 @@ int main()
 	std::cout << c * a << std::endl;
 	std::cout << c + a << std::endl;
 	std::cout << c - a << std::endl;
+
+	std::cout << c - c - c << std::endl;
+	std::cout << c - c - a << std::endl;
 }
