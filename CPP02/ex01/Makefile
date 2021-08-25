@@ -123,13 +123,13 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex04
+NAME = ex01
 
-SET_NAME_EXE	= replace
+SET_NAME_EXE	= fixed
 SET_INC_DIR		=
-SET_SRCS		= ./main.cpp
+SET_SRCS		= ./main.cpp ./Fixed.cpp
 SET_FTST_SRCS	=
-SET_FLAGS		= -O2
+SET_FLAGS		= -O2 -Werror=strict-aliasing=0
 SET_LIBS		=
 SET_LIBS_DIRS	=
 

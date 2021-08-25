@@ -1,5 +1,8 @@
 *.out
 .release
+.vscode
+
+# exe names
 megaphone
 phonebook
 account
@@ -9,3 +12,5 @@ karen
 karenFilter
 clapTrap
 human
+replace
+fixed

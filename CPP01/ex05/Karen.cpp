@@ -2,12 +2,12 @@
 
 Karen::Level Karen::convert2lvl(std::string level)
 {
-	int	func_idx =
+	int	idx =
 		((level == "DEBUG") * (int)DEBUG) +
 		((level == "INFO") * (int)INFO) +
 		((level == "WARNING") * (int)WARNING) +
 		((level == "ERROR") * (int)ERROR);
-	return static_cast<Level>(func_idx);
+	return static_cast<Level>(idx);
 }
 
 void Karen::complain(std::string level)

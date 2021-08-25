@@ -1,51 +1,26 @@
 #include <iostream>
-#include <cmath>
-
-class Fixed
-{
-public:
-    Fixed() : _raw_bits(0) {}
-
-    Fixed(float num)
-    {
-        _raw_bits = (int)num << _fractinal_bits;
-    }
-
-    Fixed(int num) : _raw_bits(num << _fractinal_bits) {}
-
-    Fixed(Fixed const& other) : _raw_bits(other._raw_bits) {}
-
-    Fixed operator=(Fixed const& other)
-    {
-        this->_raw_bits = other._raw_bits;
-        return *this;
-    }
-
-    float toFloat() const
-    {
-        return static_cast<float>(_raw_bits >> _fractinal_bits)
-                + (_raw_bits & (_fractinal_bits - 1));
-    }
-
-    int toInt() const { return std::roundf(this->toFloat()); }
-
-    ~Fixed() {}
-
-    int32_t getRawBits() const { return _raw_bits; }
-    void    setRawBits(int32_t raw_bits) { this->_raw_bits = raw_bits; }
-private:
-    int32_t                 _raw_bits;
-    static uint8_t const    _fractinal_bits = 8;
-};
+#include "Fixed.hpp"
 
 int main()
 {
-    Fixed a;
-    Fixed b(a);
-    Fixed c;
-    c = b;
-    std::cout << a.getRawBits() << std::endl;
-    std::cout << b.getRawBits() << std::endl;
-    std::cout << c.getRawBits() << std::endl;
+    Fixed a(3.5f);
+    Fixed const b( 10 );
+    Fixed const c( 42.42f );
+    Fixed const d( b );
+    Fixed const g( 0.42f );
+    Fixed const z( 0.f );
+    a = Fixed( 1234.4321f );
+    std::cout << "a is " << a << std::endl;
+    std::cout << "b is " << b << std::endl;
+    std::cout << "c is " << c << std::endl;
+    std::cout << "d is " << d << std::endl;
+    std::cout << "g is " << g << std::endl;
+    std::cout << "z is " << z << std::endl;
+    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+    std::cout << "g is " << g.toInt() << " as integer" << std::endl;
+    std::cout << "z is " << z.toInt() << " as integer" << std::endl;
     return 0;
 }

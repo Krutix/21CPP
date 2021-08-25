@@ -123,9 +123,9 @@ b_norml:
 #
 #		BUILD_SET
 #
-NAME = ex04
+NAME = ex00
 
-SET_NAME_EXE	= replace
+SET_NAME_EXE	= fixed
 SET_INC_DIR		=
 SET_SRCS		= ./main.cpp
 SET_FTST_SRCS	=

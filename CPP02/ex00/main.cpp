@@ -13,7 +13,7 @@ public:
         std::cout << "Copy constructor called\n";
     }
 
-    Fixed operator=(Fixed const& other)
+    Fixed& operator=(Fixed const& other)
     {
         std::cout << "Assignation operator called\n";
         this->_raw_bits = other._raw_bits;
