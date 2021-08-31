@@ -30,11 +30,16 @@ int main()
 	std::cout << c / a << std::endl;
 	a = Fixed(-0.5f);
 	c = Fixed(-10);
+	std::cout << "-a: " << a << std::endl;
+	std::cout << "-c: " << c << std::endl;
 	std::cout << c / a << std::endl;
-	a = Fixed(-0.5f);
-	c = Fixed(-10);
 	std::cout << c * a << std::endl;
 	a = Fixed(-0.5f);
 	c = Fixed(10);
 	std::cout << c * a << std::endl;
+
+	std::cout << Fixed(-2) << ' ' << Fixed(-2.f) << '\n';
+	std::cout << Fixed(-1) << ' ' << Fixed(-1.f) << '\n';
+	std::cout << Fixed(-.5f) << '\n';
+	std::cout << Fixed(-10) << ' ' << Fixed(-10.f) << '\n';
 }

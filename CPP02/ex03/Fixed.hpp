@@ -52,7 +52,7 @@ public:
     raw_bits_t  getRawBits() const { return _raw_bits; }
     void        setRawBits(raw_bits_t raw_bits) { this->_raw_bits = raw_bits; }
 private:
-    raw_bits_t              _raw_bits = 0;
+    raw_bits_t              _raw_bits;
 };
 
 template<size_t Frac_Bits>

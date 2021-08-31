@@ -8,14 +8,12 @@
 #define INT_BIT_SIZE			(sizeof(int) * 8)
 
 template<size_t Frac_Bits>
-Fixed<Frac_Bits>::Fixed() {}
+Fixed<Frac_Bits>::Fixed() : _raw_bits(0) {}
 
 template<size_t Frac_Bits>
 Fixed<Frac_Bits>::Fixed(float num)
 {
 	_raw_bits = static_cast<int>(num) << Frac_Bits;
-	_raw_bits *= 1 - (num < 0) * 2;
-	_raw_bits -= (num < 0) * (1 << Frac_Bits);
 
 	int exponent =
 		((reinterpret_cast<int&>(num) & FLOAT_EXP_MASK) >> FLOAT_EXP_OFFSET)

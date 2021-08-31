@@ -15,8 +15,6 @@ Fixed::Fixed()
 Fixed::Fixed(float num)
 {
 	_raw_bits = static_cast<int>(num) << _fractinal_bits;
-	_raw_bits *= 1 - (num < 0) * 2;
-	_raw_bits -= (num < 0) * (1 << _fractinal_bits);
 
 	int exponent =
 		((reinterpret_cast<int&>(num) & FLOAT_EXP_MASK) >> FLOAT_EXP_OFFSET)
