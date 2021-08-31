@@ -8,8 +8,7 @@
 #define INT_BIT_SIZE			(sizeof(int) * 8)
 
 template<size_t Frac_Bits>
-Fixed<Frac_Bits>::Fixed()
-	: _raw_bits(0) {}
+Fixed<Frac_Bits>::Fixed() {}
 
 template<size_t Frac_Bits>
 Fixed<Frac_Bits>::Fixed(float num)
