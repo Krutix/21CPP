@@ -1,5 +1,3 @@
-#include "Fixed.hpp"
-
 #define FLOAT_BIAS				127
 #define FLOAT_EXP_OFFSET		23
 #define FLOAT_MANTISS_INVBIT	(1 << FLOAT_EXP_OFFSET)
@@ -9,14 +7,16 @@
 #define FLOAT_SIGNBIT			(1 << 31)
 #define INT_BIT_SIZE			(sizeof(int) * 8)
 
-Fixed::Fixed()
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>::Fixed()
 	: _raw_bits(0) {}
 
-Fixed::Fixed(float num)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>::Fixed(float num)
 {
-	_raw_bits = static_cast<int>(num) << _fractinal_bits;
+	_raw_bits = static_cast<int>(num) << Frac_Bits;
 	_raw_bits *= 1 - (num < 0) * 2;
-	_raw_bits -= (num < 0) * (1 << _fractinal_bits);
+	_raw_bits -= (num < 0) * (1 << Frac_Bits);
 
 	int exponent =
 		((reinterpret_cast<int&>(num) & FLOAT_EXP_MASK) >> FLOAT_EXP_OFFSET)
@@ -28,19 +28,32 @@ Fixed::Fixed(float num)
 		frac_raw_bits = (mantissa <<  exponent) & FLOAT_MANTISS_MASK;
 	else
 		frac_raw_bits = (mantissa >> -exponent) & FLOAT_MANTISS_MASK;
-	frac_raw_bits >>= FLOAT_EXP_OFFSET - _fractinal_bits;
+	frac_raw_bits >>= FLOAT_EXP_OFFSET - Frac_Bits;
 	frac_raw_bits *= 1 - (num < 0) * 2;
-	frac_raw_bits &= (1 << _fractinal_bits) - 1;
+	frac_raw_bits &= (1 << Frac_Bits) - 1;
 	_raw_bits |= frac_raw_bits;
 }
 
-Fixed::Fixed(int num)
-	: _raw_bits(num << _fractinal_bits) {}
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>::Fixed(int num)
+	: _raw_bits(num << Frac_Bits) {}
 
-Fixed::Fixed(Fixed const& other)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>::Fixed(Fixed<Frac_Bits> const& other)
 	: _raw_bits(other._raw_bits) {}
 
-Fixed& Fixed::operator=(Fixed const& other)
+template<size_t Frac_Bits>
+template<size_t Other_Frac_Bits>
+Fixed<Frac_Bits>::Fixed(Fixed<Other_Frac_Bits> const& other)
+{
+    if (Frac_Bits > Other_Frac_Bits)
+        _raw_bits = other.getRawBits() << (Frac_Bits - Other_Frac_Bits);
+    else
+        _raw_bits = other.getRawBits() >> (Other_Frac_Bits - Frac_Bits);
+}
+
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>& Fixed<Frac_Bits>::operator=(Fixed<Frac_Bits> const& other)
 {
 	if (this == &other)
 		return *this;
@@ -48,7 +61,8 @@ Fixed& Fixed::operator=(Fixed const& other)
 	return (*this);
 }
 
-float Fixed::toFloat() const
+template<size_t Frac_Bits>
+float Fixed<Frac_Bits>::toFloat() const
 {
 	int unsign_raw_bits = std::abs(_raw_bits);
 
@@ -65,103 +79,137 @@ float Fixed::toFloat() const
 	f |= FLOAT_SIGNBIT * (_raw_bits < 0);
 
 	bool is_zero = !!_raw_bits;
-	f |= (((i - _fractinal_bits) + FLOAT_BIAS) << FLOAT_EXP_OFFSET) * is_zero;
+	f |= (((i - Frac_Bits) + FLOAT_BIAS) << FLOAT_EXP_OFFSET) * is_zero;
 	return reinterpret_cast<float&>(f);
 }
 
-int Fixed::toInt() const
+template<size_t Frac_Bits>
+int Fixed<Frac_Bits>::toInt() const
 {
 	return (roundf(this->toFloat()));
 }
 
-Fixed::~Fixed() {}
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>::~Fixed() {}
 
-std::ostream& operator<< (std::ostream& os, Fixed const& fixed)
+template<size_t Frac_Bits>
+std::ostream& operator<< (std::ostream& os, Fixed<Frac_Bits> const& fixed)
 {
 	return os << fixed.toFloat();
 }
 
-bool  Fixed::operator <  (Fixed const& other) const { return this->_raw_bits < other._raw_bits; }
-bool  Fixed::operator <= (Fixed const& other) const { return this->_raw_bits <= other._raw_bits; }
-bool  Fixed::operator >  (Fixed const& other) const { return this->_raw_bits > other._raw_bits; }
-bool  Fixed::operator >= (Fixed const& other) const { return this->_raw_bits >= other._raw_bits; }
-bool  Fixed::operator == (Fixed const& other) const { return this->_raw_bits == other._raw_bits; }
-bool  Fixed::operator != (Fixed const& other) const { return this->_raw_bits != other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator <  (Fixed<Frac_Bits> const& other) const { return this->_raw_bits < other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator <= (Fixed<Frac_Bits> const& other) const { return this->_raw_bits <= other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator >  (Fixed<Frac_Bits> const& other) const { return this->_raw_bits > other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator >= (Fixed<Frac_Bits> const& other) const { return this->_raw_bits >= other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator == (Fixed<Frac_Bits> const& other) const { return this->_raw_bits == other._raw_bits; }
+template<size_t Frac_Bits>
+bool  Fixed<Frac_Bits>::operator != (Fixed<Frac_Bits> const& other) const { return this->_raw_bits != other._raw_bits; }
 
-Fixed  Fixed::operator + (Fixed const& other) const { return (Fixed(*this) += other); }
-Fixed  Fixed::operator - (Fixed const& other) const { return (Fixed(*this) -= other); }
-Fixed  Fixed::operator * (Fixed const& other) const { return (Fixed(*this) *= other); }
-Fixed  Fixed::operator / (Fixed const& other) const { return (Fixed(*this) /= other); }
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>  Fixed<Frac_Bits>::operator + (Fixed<Frac_Bits> const& other) const { return (Fixed<Frac_Bits>(*this) += other); }
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>  Fixed<Frac_Bits>::operator - (Fixed<Frac_Bits> const& other) const { return (Fixed<Frac_Bits>(*this) -= other); }
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>  Fixed<Frac_Bits>::operator * (Fixed<Frac_Bits> const& other) const { return (Fixed<Frac_Bits>(*this) *= other); }
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>  Fixed<Frac_Bits>::operator / (Fixed<Frac_Bits> const& other) const { return (Fixed<Frac_Bits>(*this) /= other); }
 
-Fixed&  Fixed::operator += (Fixed const& other)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator += (Fixed<Frac_Bits> const& other)
 {
 	this->_raw_bits += other._raw_bits;
 	return *this;
 }
 
-Fixed&  Fixed::operator -= (Fixed const& other)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator -= (Fixed<Frac_Bits> const& other)
 {
 	this->_raw_bits -= other._raw_bits;
 	return *this;
 }
 
-Fixed&  Fixed::operator *= (Fixed const& other)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator *= (Fixed<Frac_Bits> const& other)
 {
-	_raw_bits = ((db_raw_bits_t)_raw_bits * other._raw_bits) >> _fractinal_bits;
+	_raw_bits = ((db_raw_bits_t)_raw_bits * other._raw_bits) >> Frac_Bits;
 	return *this;
 }
 
-Fixed&  Fixed::operator /= (Fixed const& other)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator /= (Fixed<Frac_Bits> const& other)
 {
 	db_raw_bits_t db_raw_bits = _raw_bits;
-	db_raw_bits <<= _fractinal_bits;
+	db_raw_bits <<= Frac_Bits;
 	db_raw_bits /= other._raw_bits;
 	this->_raw_bits = db_raw_bits;
 	return *this;
 }
 
-Fixed   Fixed::operator ++ (int)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>   Fixed<Frac_Bits>::operator ++ (int)
 {
 	Fixed copy(*this);
 	this->_raw_bits++;
 	return copy;
 }
 
-Fixed&  Fixed::operator ++ ()
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator ++ ()
 {
 	this->_raw_bits++;
 	return *this;
 }
 
-Fixed   Fixed::operator -- (int)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>   Fixed<Frac_Bits>::operator -- (int)
 {
 	Fixed copy(*this);
 	this->_raw_bits++;
 	return copy;
 }
 
-Fixed&  Fixed::operator -- ()
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&  Fixed<Frac_Bits>::operator -- ()
 {
 	this->_raw_bits++;
 	return *this;
 }
 
-Fixed&       Fixed::max(Fixed& a, Fixed& b)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&       Fixed<Frac_Bits>::max(Fixed<Frac_Bits>& a, Fixed<Frac_Bits>& b)
 {
 	return a > b ? a : b;
 }
 
-Fixed const& Fixed::max(Fixed const& a, Fixed const& b)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits> const& Fixed<Frac_Bits>::max(Fixed<Frac_Bits> const& a, Fixed<Frac_Bits> const& b)
 {
 	return a > b ? a : b;
 }
 
-Fixed&       Fixed::min(Fixed& a, Fixed& b)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits>&       Fixed<Frac_Bits>::min(Fixed<Frac_Bits>& a, Fixed<Frac_Bits>& b)
 {
 	return a < b ? a : b;
 }
 
-Fixed const& Fixed::min(Fixed const& a, Fixed const& b)
+template<size_t Frac_Bits>
+Fixed<Frac_Bits> const& Fixed<Frac_Bits>::min(Fixed<Frac_Bits> const& a, Fixed<Frac_Bits> const& b)
 {
 	return a < b ? a : b;
 }
+
+#undef FLOAT_BIAS
+#undef FLOAT_EXP_OFFSET
+#undef FLOAT_MANTISS_INVBIT
+#undef FLOAT_MANTISS_MASK
+#undef FLOAT_EXP_SIZE
+#undef FLOAT_EXP_MASK
+#undef FLOAT_SIGNBIT
+#undef INT_BIT_SIZE

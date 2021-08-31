@@ -3,6 +3,7 @@
 #include <iostream>
 #include <numeric>
 
+template<size_t Frac_Bits = 8>
 class Fixed
 {
 private:
@@ -13,6 +14,8 @@ public:
     Fixed(float num);
     Fixed(int num);
     Fixed(Fixed const& other);
+    template<size_t Other_Frac_Bits>
+    Fixed(Fixed<Other_Frac_Bits> const& other);
     ~Fixed();
 
     bool  operator <  (Fixed const& other) const;
@@ -50,7 +53,9 @@ public:
     void        setRawBits(raw_bits_t raw_bits) { this->_raw_bits = raw_bits; }
 private:
     raw_bits_t              _raw_bits;
-    static u_int8_t const   _fractinal_bits = 8;
 };
 
-std::ostream& operator<< (std::ostream& os, Fixed const& fixed);
+template<size_t Frac_Bits>
+std::ostream& operator<< (std::ostream& os, Fixed<Frac_Bits> const& fixed);
+
+#include "Fixed.cpp"

@@ -127,7 +127,7 @@ NAME = ex03
 
 SET_NAME_EXE	= bsp
 SET_INC_DIR		=
-SET_SRCS		= ./main.cpp ./Fixed.cpp ./bsp.cpp
+SET_SRCS		= ./main.cpp ./bsp.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2 -Werror=strict-aliasing=0
 SET_LIBS		=
