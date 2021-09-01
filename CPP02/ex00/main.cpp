@@ -30,6 +30,7 @@ public:
         std::cout << "getRawBits member function called\n";
         return _raw_bits;
     }
+
     void    setRawBits(int32_t raw_bits)
     {
         std::cout << "setRawBits member function called\n";

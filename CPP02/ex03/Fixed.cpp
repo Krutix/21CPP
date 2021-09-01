@@ -7,13 +7,16 @@
 #define FLOAT_SIGNBIT			(1 << 31)
 #define INT_BIT_SIZE			(sizeof(int) * 8)
 
+#include "Fixed.hpp"
+
 template<size_t Frac_Bits>
 Fixed<Frac_Bits>::Fixed() : _raw_bits(0) {}
 
 template<size_t Frac_Bits>
 Fixed<Frac_Bits>::Fixed(float num)
 {
-	_raw_bits = static_cast<int>(num) << Frac_Bits;
+	float abs_num = std::abs(num);
+	_raw_bits = static_cast<int>(abs_num) << Frac_Bits;
 
 	int exponent =
 		((reinterpret_cast<int&>(num) & FLOAT_EXP_MASK) >> FLOAT_EXP_OFFSET)
@@ -26,9 +29,9 @@ Fixed<Frac_Bits>::Fixed(float num)
 	else
 		frac_raw_bits = (mantissa >> -exponent) & FLOAT_MANTISS_MASK;
 	frac_raw_bits >>= FLOAT_EXP_OFFSET - Frac_Bits;
-	frac_raw_bits *= 1 - (num < 0) * 2;
 	frac_raw_bits &= (1 << Frac_Bits) - 1;
 	_raw_bits |= frac_raw_bits;
+	_raw_bits *= 1 - (num < 0) * 2;
 }
 
 template<size_t Frac_Bits>

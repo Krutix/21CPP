@@ -14,7 +14,8 @@ Fixed::Fixed()
 
 Fixed::Fixed(float num)
 {
-	_raw_bits = static_cast<int>(num) << _fractinal_bits;
+	float abs_num = std::abs(num);
+	_raw_bits = static_cast<int>(abs_num) << _fractinal_bits;
 
 	int exponent =
 		((reinterpret_cast<int&>(num) & FLOAT_EXP_MASK) >> FLOAT_EXP_OFFSET)
@@ -27,9 +28,9 @@ Fixed::Fixed(float num)
 	else
 		frac_raw_bits = (mantissa >> -exponent) & FLOAT_MANTISS_MASK;
 	frac_raw_bits >>= FLOAT_EXP_OFFSET - _fractinal_bits;
-	frac_raw_bits *= 1 - (num < 0) * 2;
 	frac_raw_bits &= (1 << _fractinal_bits) - 1;
 	_raw_bits |= frac_raw_bits;
+	_raw_bits *= 1 - (num < 0) * 2;
 }
 
 Fixed::Fixed(int num)

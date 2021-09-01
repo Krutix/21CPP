@@ -6,6 +6,7 @@ int main()
     Fixed a(-3.5f);
     Fixed const b( -10 );
     Fixed const c( -42.42f );
+    Fixed const c2( -11.42f );
     Fixed const d( b );
     Fixed const g( 0.42f );
     Fixed const z( 0.f );
@@ -13,6 +14,7 @@ int main()
     std::cout << "a is " << a << std::endl;
     std::cout << "b is " << b << std::endl;
     std::cout << "c is " << c << std::endl;
+    std::cout << "c2 is " << c2 << std::endl;
     std::cout << "d is " << d << std::endl;
     std::cout << "g is " << g << std::endl;
     std::cout << "z is " << z << std::endl;

@@ -42,4 +42,9 @@ int main()
 	std::cout << Fixed(-1) << ' ' << Fixed(-1.f) << '\n';
 	std::cout << Fixed(-.5f) << '\n';
 	std::cout << Fixed(-10) << ' ' << Fixed(-10.f) << '\n';
+	//TODO fix this shit
+	std::cout << Fixed(-.42f) << '\n';
+	std::cout << Fixed(.42f) << '\n';
+	std::cout << Fixed(-42.42f) + 0.42f << '\n';
+	std::cout << Fixed(-42.42f) - -0.42f << '\n';
 }
