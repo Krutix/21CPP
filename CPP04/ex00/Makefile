@@ -83,19 +83,6 @@ ${BUILD_TARGET}:		${BUILD_OBJS} ${BUILD_TASKS}
 				printf ${PRETTY_STATUS}		"${PRETTY_DONE}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "compile" || \
 			{	printf ${PRETTY_STATUS}		"${PRETTY_FAIL}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "compile" ; exit 1;	}
 
-FTST_PATH =
-include ${FTST_PATH}
-FTST_DIR	= libft/ftst/
-FTST_INC	+= ${BUILD_INC_DIRS}
-FTST_LIBS	+= ${BUILD_LIBS} -lm
-FTST_LIB_DIRS += ${BUILD_LIBS_DIRS}
-FTST_TARGET = ${BUILD_OBJS}
-.PHONY:	b_test
-b_test:		${FTST_EXE}
-			@./${FTST_EXE} && \
-				printf ${PRETTY_STATUS}		"${PRETTY_DONE}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "test" || \
-			{	printf ${PRETTY_STATUS}		"${PRETTY_FAIL}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "test" ; exit 1;	}
-
 .PHONY:	b_clean
 b_clean:
 			-${RM}	${BUILD_OBJS} ${BUILD_D_FILES}

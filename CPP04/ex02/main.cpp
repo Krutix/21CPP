@@ -9,4 +9,6 @@ int main()
 	std::cout << i->getType() << " " << std::endl;
 	i->makeSound();
 	j->makeSound();
+	delete j;
+	delete i;
 }

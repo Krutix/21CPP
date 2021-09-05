@@ -1,3 +1,5 @@
+#include "Fixed.hpp"
+
 #define FLOAT_BIAS				127
 #define FLOAT_EXP_OFFSET		23
 #define FLOAT_MANTISS_INVBIT	(1 << FLOAT_EXP_OFFSET)
@@ -6,8 +8,6 @@
 #define FLOAT_EXP_MASK			(((1 << FLOAT_EXP_SIZE) - 1) << FLOAT_EXP_OFFSET)
 #define FLOAT_SIGNBIT			(1 << 31)
 #define INT_BIT_SIZE			(sizeof(int) * 8)
-
-#include "Fixed.hpp"
 
 template<size_t Frac_Bits>
 Fixed<Frac_Bits>::Fixed() : _raw_bits(0) {}

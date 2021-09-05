@@ -16,7 +16,7 @@ public:
 		std::cout << "Animal with type " << _type << " constructed from copying\n";
 	}
 
-	Animal& operator= (Animal const& other)
+	Animal& operator = (Animal const& other)
 	{
 		if (this == &other)
 			return *this;
@@ -51,7 +51,7 @@ public:
 		std::cout << "Dog with type " << this->getType() << " constructed from copying\n";
 	}
 
-	Dog& operator= (Dog const& other)
+	Dog& operator = (Dog const& other)
 	{
 		if (this == &other)
 			return *this;

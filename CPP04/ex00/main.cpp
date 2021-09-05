@@ -15,4 +15,8 @@ int main()
 	const WrongAnimal* as_animal = as_cat;
 	as_animal->makeSound();
 	as_cat->makeSound();
+	delete as_cat;
+	delete i;
+	delete j;
+	delete meta;
 }
