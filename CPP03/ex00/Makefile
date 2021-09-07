@@ -25,7 +25,7 @@ PRETTY_STATUS	= "%b%b%b ${COLOR_YELLOW}%b${COLOR_RESET} %b\n"
 NAME			?= -
 
 # Compiler setup
-CXX			= g++
+CXX			= clang++
 CXXFLAGS	= --std=c++98 -Wall -Wextra -Werror
 
 #######################################################

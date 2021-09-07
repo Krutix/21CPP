@@ -14,9 +14,17 @@ public:
 class MateriaSource : public IMateriaSource
 {
 public:
+    ~MateriaSource();
     void learnMateria(AMateria* learn);
     AMateria* createMateria(std::string const& type);
 
 private:
-    AMateria* m_learn;
+    struct MateriaList {
+        AMateria*    materia;
+        MateriaList* next;
+
+        MateriaList(AMateria* materia, MateriaList* next);
+        ~MateriaList();
+    };
+    MateriaList* m_learn;
 };
