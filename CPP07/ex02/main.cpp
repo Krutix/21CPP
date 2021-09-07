@@ -12,11 +12,21 @@ struct test
     ~test() { std::cout << "destructor " << idx << std::endl; }
 };
 
+namespace ft {
+
+template<typename T>
+T const& constCast(T& l)
+{
+    return const_cast<T const&>(l);
+}
+
+}
+
 int main()
 {
     Array<test> arr(10);
     arr[5] = test();
-    arr = const_cast<Array<test> const&>(arr);
+    arr = ft::constCast(arr);
     arr = Array<test>(5);
     try
     {
@@ -25,5 +35,5 @@ int main()
     catch(std::out_of_range const& e) { std::cerr << e.what() << '\n'; }
     catch(std::exception const& e) { std::cerr << "Mmmmm... Ok: " << e.what() << '\n'; }
 
-    std::cout << const_cast<Array<test> const&>(arr)[4].idx << '\n';
+    std::cout << ft::constCast(arr)[4].idx << '\n';
 }
