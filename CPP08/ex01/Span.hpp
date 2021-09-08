@@ -22,9 +22,6 @@ public:
 
     void addNumber(int n);
 
-    template<typename ...Args>
-    void addNumber(int n, Args... args) { addNumber(n); addNumber(args...); }
-
     size_t longestSpan() const;
     size_t shortestSpan() const;
 
