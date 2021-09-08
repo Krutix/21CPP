@@ -9,12 +9,8 @@ int easyfind(T const& container, int num) {
 
     position = std::find(container.begin(), container.end(), num);
 
-    if (position != container.end())
-    {
-        return (std::distance(container.begin(), position));
-    }
-    else
-    {
+    if (position == container.end())
         return -1;
-    }
+
+    return (std::distance(container.begin(), position));
 }
