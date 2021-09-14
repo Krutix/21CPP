@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <iostream>
 
 typedef unsigned int uint32_t;
 
@@ -15,9 +16,9 @@ public:
 
 	~Bureacrat();
 
-	void gradeUp() throw(Bureacrat::GradeTooHighException);
+	void gradeRise() throw(Bureacrat::GradeTooHighException);
 
-	void gradeDown() throw(Bureacrat::GradeTooLowException);
+	void downgrade() throw(Bureacrat::GradeTooLowException);
 
 	uint32_t            getGrade() const throw() { return m_grade; }
 	std::string const&  getName() const throw() { return m_name; }
@@ -36,3 +37,8 @@ private:
 	std::string m_name;
 	uint32_t    m_grade;
 };
+
+inline std::ostream& operator << (std::ostream& os, Bureacrat const& bur)
+{
+	return os << bur.getName() << ", with grade " << bur.getGrade();
+}

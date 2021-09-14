@@ -34,11 +34,14 @@ int main()
 	a3 = createBureacrat("Anton", 75);
 	assert(!e1 && !e2 && !e3);
 	assert(a1 && a2 && a3);
-	try { a1->gradeDown(); }  catch (std::exception& e) { std::cerr << e.what() << std::endl; }
-	try { a2->gradeUp(); }    catch (std::exception& e) { std::cerr << e.what() << std::endl; }
-	a3->gradeUp();
-	a3->gradeDown();
+	try { a1->downgrade(); }  catch (std::exception& e) { std::cerr << e.what() << std::endl; }
+	try { a2->gradeRise(); }    catch (std::exception& e) { std::cerr << e.what() << std::endl; }
+	a3->gradeRise();
+	a3->downgrade();
 	assert(a1->getGrade() == 150);
 	assert(a2->getGrade() == 1);
 	assert(a3->getGrade() == 75);
+	std::cout << *a1 << std::endl;
+	std::cout << *a2 << std::endl;
+	std::cout << *a1 << std::endl;
 }

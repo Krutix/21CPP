@@ -4,9 +4,9 @@ Bureacrat::Bureacrat(std::string const& name, uint32_t grade) throw(std::excepti
 try
 {
 	if (grade < 1)
-		throw GradeTooHighException("Grade is too high");
+		throw GradeTooHighException(name + " grade is too high");
 	if (grade > 150)
-		throw GradeTooLowException("Grade is too low");
+		throw GradeTooLowException(name + " grade is too low");
 	m_name = name;
 	m_grade = grade;
 }
@@ -25,17 +25,17 @@ Bureacrat& Bureacrat::operator = (Bureacrat const& o) throw(std::bad_alloc)
 
 Bureacrat::~Bureacrat() {}
 
-void Bureacrat::gradeUp() throw(Bureacrat::GradeTooHighException)
+void Bureacrat::gradeRise() throw(Bureacrat::GradeTooHighException)
 {
 	if (m_grade - 1 < 1)
-		throw GradeTooHighException("Grade is too high");
+		throw GradeTooHighException(m_name + " grade rise is higher then max");
 	m_grade--;
 }
 
-void Bureacrat::gradeDown() throw(Bureacrat::GradeTooLowException)
+void Bureacrat::downgrade() throw(Bureacrat::GradeTooLowException)
 {
 	if (m_grade + 1 > 150)
-		throw GradeTooLowException("Grade is too low");
+		throw GradeTooLowException(m_name + " downgrade is lower then min");
 	m_grade++;
 }
 
