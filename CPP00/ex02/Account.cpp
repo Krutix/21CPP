@@ -100,6 +100,14 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-	std::time_t t = std::time(nullptr);
-	std::cout << '[' << std::put_time(gmtime(&t), "%Y%m%d_%H%M%S") << ']';
+	std::time_t t = std::time(NULL);
+	std::tm tm = *std::gmtime(&t);
+	
+	std::cout << '[' << 1900 + tm.tm_year
+					<< std::setfill('0') << std::setw(2) << tm.tm_mon
+					<< std::setfill('0') << std::setw(2) << tm.tm_mday << '_'
+					<< std::setfill('0') << std::setw(2) << tm.tm_hour
+					<< std::setfill('0') << std::setw(2) << tm.tm_min
+					<< std::setfill('0') << std::setw(2) << tm.tm_sec << ']';
+//, "%Y%m%d_%H%M%S")
 }

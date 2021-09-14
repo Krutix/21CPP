@@ -88,7 +88,11 @@ void   PhoneBook::add(std::istream& is)
     std::cout << "Enter darkest secret: ";
     is >> darkest_secret;
 
-    ::new (&_phonebook[insert_person()])Contact(first_name, last_name, nickname, phone_number, darkest_secret);
+    size_t next_idx = insert_person();
+    _phonebook[next_idx] = Contact(
+                            first_name, last_name,
+                            nickname, phone_number,
+                            darkest_secret);
 }
 
 void   PhoneBook::search(std::istream& is)
