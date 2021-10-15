@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        for (size_t idx = 1; idx < static_cast<size_t>(argc); idx++)
+        for (int idx = 1; idx < argc; idx++)
             std::cout << toupper(argv[idx]);
-        std::cout << '\n';
+        std::cout << std::endl;
     }
 }
