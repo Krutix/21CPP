@@ -25,16 +25,16 @@ void   PhoneBook::add(std::istream& is)
     std::string phone_number;
     std::string darkest_secret;
 
-    std::cout << "Enter first name: ";
-    is >> first_name;
-    std::cout << "Enter last name: ";
-    is >> last_name;
-    std::cout << "Enter nickname: ";
-    is >> nickname;
-    std::cout << "Enter phone number: ";
-    is >> phone_number;
-    std::cout << "Enter darkest secret: ";
-    is >> darkest_secret;
+    std::cout << "Enter first name:\n";
+	std::getline(is, first_name);
+    std::cout << "Enter last name:\n";
+	std::getline(is, last_name);
+    std::cout << "Enter nickname:\n";
+	std::getline(is, nickname);
+    std::cout << "Enter phone number:\n";
+	std::getline(is, phone_number);
+    std::cout << "Enter darkest secret:\n";
+    std::getline(is, darkest_secret);
 
     _phonebook[next_insert_pos()] = Contact(
                             first_name, last_name,
