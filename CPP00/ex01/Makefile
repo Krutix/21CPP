@@ -127,7 +127,7 @@ NAME = ex01
 
 SET_NAME_EXE	= phonebook
 SET_INC_DIR		=
-SET_SRCS		= ./phonebook.cpp main.cpp
+SET_SRCS		= ./phonebook.cpp ./main.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2
 SET_LIBS		=

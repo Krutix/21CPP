@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <string>
 #include <unistd.h>
@@ -6,6 +7,17 @@
 void usage()
 {
 	std::cout << "./replace input_file find replace\n";
+}
+
+void	replace(std::string& fix_str, std::string const& from, std::string const& to)
+{
+	size_t findplace = 0;
+
+	while ((findplace = fix_str.find(from, findplace)) != std::string::npos)
+	{
+		fix_str.erase(findplace, from.size());
+		fix_str.insert(findplace, to);
+	}
 }
 
 int main(int argc, char *argv[])
@@ -30,25 +42,20 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	std::string find(argv[2]);
-	std::string replace(argv[3]);
-	if (find.size() == 0 || replace.size() == 0)
+	std::string from(argv[2]);
+	std::string to(argv[3]);
+	if (from.size() == 0 || to.size() == 0)
 	{
 		std::cout << "Can't work with empty string\n";
 		return 1;
 	}
 
-	for (std::string readbuf = ""; std::getline(in_file, readbuf); )
-	{
-		for (size_t findplace; (findplace = readbuf.find(find)) != std::string::npos; )
-		{
-			readbuf.erase(findplace, find.size());
-			readbuf.insert(findplace, replace);
-		}
-		out_file << readbuf;
-		if (!in_file.eof())
-			out_file << std::endl;
-	}
+	std::stringstream ss;
+	ss << in_file.rdbuf();
+	std::string fix_str(ss.str());
+	replace(fix_str, from, to);
+	out_file << fix_str;
+
 	in_file.close();
 	out_file.close();
 }
