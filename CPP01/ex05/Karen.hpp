@@ -28,8 +28,8 @@ public:
 private:
 	typedef void(Karen::*msg_func)();
 
-	void debug() { std::cout << WRAP_COLOR(COLOR_BLUE, "[DEBUG]\n"); }
-	void info() { std::cout << WRAP_COLOR(COLOR_GREEN, "[INFO]\n"); }
-	void warning() { std::cout << WRAP_COLOR(COLOR_YELLOW, "[WARNING]\n"); }
-	void error() { std::cout << WRAP_COLOR(COLOR_RED, "[ERROR]\n"); }
+	void debug();
+	void info();
+	void warning();
+	void error();
 };

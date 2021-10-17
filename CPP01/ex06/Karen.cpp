@@ -10,6 +10,11 @@ Karen::Level Karen::convert2lvl(std::string level)
 	return static_cast<Level>(idx);
 }
 
+void Karen::debug() { std::cout << WRAP_COLOR(COLOR_BLUE, "[DEBUG]\n"); }
+void Karen::info() { std::cout << WRAP_COLOR(COLOR_GREEN, "[INFO]\n"); }
+void Karen::warning() { std::cout << WRAP_COLOR(COLOR_YELLOW, "[WARNING]\n"); }
+void Karen::error() { std::cout << WRAP_COLOR(COLOR_RED, "[ERROR]\n"); }
+
 void Karen::complain(std::string level)
 {
 	msg_func mf[] =

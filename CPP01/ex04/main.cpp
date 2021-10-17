@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 		return 1; 
 	}
 
-	std::ofstream out_file(std::string(argv[1]).append(".REPLACE").c_str());
+	std::ofstream out_file(std::string(argv[1]).append(".REPLACE"));
 	if (!out_file.is_open())
 	{
 		std::cout << "Can't create output file\n";
