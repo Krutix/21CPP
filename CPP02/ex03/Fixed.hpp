@@ -58,4 +58,4 @@ private:
 template<size_t Frac_Bits>
 std::ostream& operator<< (std::ostream& os, Fixed<Frac_Bits> const& fixed);
 
-#include "Fixed.cpp"
+#include "Fixed.inl"

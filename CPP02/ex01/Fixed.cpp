@@ -80,3 +80,6 @@ std::ostream& operator<< (std::ostream& os, Fixed const& fixed)
 {
 	return os << fixed.toFloat();
 }
+
+Fixed::raw_bits_t 	Fixed::getRawBits() const { return _raw_bits; }
+void       			Fixed::setRawBits(Fixed::raw_bits_t raw_bits) { this->_raw_bits = raw_bits; }

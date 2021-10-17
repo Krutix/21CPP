@@ -78,7 +78,7 @@ ${BUILD_DIR}%.o:	%.cpp | $${@D}/.
 .PHONY:	build
 build:		${BUILD_TARGET}
 
-${BUILD_TARGET}:		${BUILD_OBJS} ${BUILD_TASKS}
+${BUILD_TARGET}:		${BUILD_OBJS} ${BUILD_TASKS} Makefile
 			@${CXX} ${CXXFLAGS} ${BUILD_OBJS} ${BUILD_FLAGS} ${BUILD_I_DIRS} ${BUILD_L_DIRS} ${BUILD_LIBS} -o ${BUILD_TARGET} && \
 				printf ${PRETTY_STATUS}		"${PRETTY_DONE}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "compile" || \
 			{	printf ${PRETTY_STATUS}		"${PRETTY_FAIL}" "${PRETTY_BUILD_NAME}" "${PRETTY_TARGET_NAME}" "${NAME}" "compile" ; exit 1;	}
@@ -127,7 +127,7 @@ NAME = ex00
 
 SET_NAME_EXE	= fixed
 SET_INC_DIR		=
-SET_SRCS		= ./main.cpp
+SET_SRCS		= ./main.cpp ./Fixed.cpp
 SET_FTST_SRCS	=
 SET_FLAGS		= -O2
 SET_LIBS		=

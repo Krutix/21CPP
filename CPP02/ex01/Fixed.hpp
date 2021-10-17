@@ -24,8 +24,8 @@ public:
 
     ~Fixed();
 
-    raw_bits_t getRawBits() const { return _raw_bits; }
-    void       setRawBits(raw_bits_t raw_bits) { this->_raw_bits = raw_bits; }
+    raw_bits_t getRawBits() const;
+    void       setRawBits(raw_bits_t raw_bits);
 private:
     raw_bits_t              _raw_bits;
     static u_int8_t const   _fractinal_bits = 8;

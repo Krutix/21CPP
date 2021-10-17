@@ -164,3 +164,6 @@ Fixed const& Fixed::min(Fixed const& a, Fixed const& b)
 {
 	return a < b ? a : b;
 }
+
+Fixed::raw_bits_t 	Fixed::getRawBits() const { return _raw_bits; }
+void       			Fixed::setRawBits(Fixed::raw_bits_t raw_bits) { this->_raw_bits = raw_bits; }
